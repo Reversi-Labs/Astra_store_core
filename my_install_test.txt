@@ -1,0 +1,137 @@
+discord:
+https://discord.com/api/download?platform=linux&format=deb
+sudo apt install path_to_deb_file
+sudo dpkg -i path_to_deb_file
+ошибка зависимостей
+sudo apt install -f
+
+ni3nayka@astra:~/Загрузки$ sudo dpkg -i discord-0.0.22.deb
+Выбор ранее не выбранного пакета discord.
+(Чтение базы данных … на данный момент установлено 175145 файлов и каталогов.)
+Подготовка к распаковке discord-0.0.22.deb …
+Распаковывается discord (0.0.22) …
+dpkg: зависимости пакетов не позволяют настроить пакет discord:
+ discord зависит от libgconf-2-4, однако:
+  Пакет libgconf-2-4 не установлен.
+ discord зависит от libc++1, однако:
+  Пакет libc++1 не установлен.
+
+dpkg: ошибка при обработке пакета discord (--install):
+ проблемы зависимостей — оставляем не настроенным
+Обрабатываются триггеры для desktop-file-utils (0.26-1astra1) …
+Обрабатываются триггеры для mime-support (3.60) …
+При обработке следующих пакетов произошли ошибки:
+ discord
+
+ sudo snap install discord 
+ 
+# https://wiki.astralinux.ru/pages/viewpage.action?pageId=187797332
+
+sudo nano /etc/apt/sources.list
+
+# репозиторий для установки snap
+deb [trusted=yes] https://mirror.yandex.ru/debian/ buster main cont$
+
+# ключи подписи репозитория
+gpg --keyserver keyserver.ubuntu.com --recv-key 648ACFD622F3D138
+gpg -a --export 648ACFD622F3D138 | sudo apt-key add -
+
+gpg --keyserver keyserver.ubuntu.com --recv-key 0E98404D386FA1D9
+gpg -a --export 0E98404D386FA1D9 | sudo apt-key add -
+
+gpg --keyserver keyserver.ubuntu.com --recv-key DCC9EFBF77E11517
+gpg -a --export DCC9EFBF77E11517 | sudo apt-key add -
+
+  Следующие подписи не могут быть проверены, так как недоступен открытый ключ: NO_PUBKEY EB3E94ADBE1229CF
+Чтение списков пакетов… Готово
+W: Ошибка GPG: https://packages.microsoft.com/repos/vscode stable InRelease: Следующие подписи не могут быть проверены, так как недоступен открытый ключ: NO_PUBKEY EB3E94ADBE1229CF
+E: Репозиторий «https://packages.microsoft.com/repos/vscode stable InRelease» не подписан.
+N: Обновление из этого репозитория нельзя выполнить безопасным способом, и поэтому по умолчанию он отключён.
+N: Смотрите справочную страницу apt-secure(8) о создании репозитория и настройке пользователя.
+
+
+E: Репозиторий «https://packages.microsoft.com/repos/vscode stable InRelease» не подписан.
+# решение
+curl -sSL https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+
+# https://discord-ms.ru/instruktsii/linux/
+sudo apt install snapd spand-xdg-open 
+
+ошибка
+sudo apt --fix-broken install
+y
+
+# https://discord-ms.ru/instruktsii/linux/
+sudo snap install discord 
+
+#################################################################################################################################################################
+
+https://wiki.astralinux.ru/pages/viewpage.action?pageId=187797332
+
+#################################################################################################################################################################
+
+github
+
+
+https://gist.github.com/dvmn-tasks/4e4ae1ac410765e678850a3c4e970bd9
+
+
+# закачаем файлик
+wget https://github.com/shiftkey/desktop/releases/download/release-3.1.1-linux1/GitHubDesktop-linux-3.1.1-linux1.deb
+wget https://github.com/shiftkey/desktop/releases/download/release-3.0.6-linux1/GitHubDesktop-linux-3.0.6-linux1.deb
+
+
+sudo dpkg -i GitHubDesktop-linux-3.1.1-linux1.deb
+
+
+Выбор ранее не выбранного пакета github-desktop.
+(Чтение базы данных … на данный момент установлено 175365 файлов и каталогов.)
+Подготовка к распаковке GitHubDesktop-linux-3.1.1-linux1.deb …
+Распаковывается github-desktop (3.1.1-linux1) …
+dpkg: зависимости пакетов не позволяют настроить пакет github-desktop:
+ github-desktop зависит от kde-cli-tools | kde-runtime | trash-cli | libglib2.0-bin | gvfs-bin, однако:
+  Пакет kde-cli-tools не установлен.
+  Пакет kde-runtime не установлен.
+  Пакет trash-cli не установлен.
+  Пакет libglib2.0-bin не установлен.
+  Пакет gvfs-bin не установлен.
+
+dpkg: ошибка при обработке пакета github-desktop (--install):
+ проблемы зависимостей — оставляем не настроенным
+Обрабатываются триггеры для desktop-file-utils (0.26-1astra1) …
+Обрабатываются триггеры для mime-support (3.60) …
+Обрабатываются триггеры для hicolor-icon-theme (0.17-2) …
+При обработке следующих пакетов произошли ошибки:
+ github-desktop
+
+ 
+sudo apt install kde-cli-tools
+
+
+Чтение списков пакетов… Готово
+Построение дерева зависимостей       
+Чтение информации о состоянии… Готово
+Возможно, для исправления этих ошибок вы захотите воспользоваться «apt-get -f install».
+Пакеты, имеющие неудовлетворённые зависимости:
+ kde-cli-tools : Зависит: kde-cli-tools-data (= 4:5.14.5-1) но он не будет установлен
+                 Зависит: libkf5su-bin но он не будет установлен
+                 Зависит: libkf5su5 (>= 4.96.0) но он не будет установлен
+                 Зависит: libkworkspace5-5 (>= 4:5.13.1) но он не будет установлен
+E: Неудовлетворённые зависимости. Попытайтесь выполнить «apt --fix-broken install», не указывая имени пакета, (или найдите другое решение).
+
+
+apt --fix-broken install
+Хотите продолжить? [Д/н]
+y
+
+bash: y: команда не найдена
+
+sudo dpkg -r github-desktop
+
+
+#################################################################################################################################################################
+
+Cloning into '/home/ni3nayka/Документы/GitHub/ASPP'...
+/usr/lib/github-desktop/resources/app/git/libexec/git-core/git-remote-https: symbol lookup error: /usr/lib/github-desktop/resources/app/git/libexec/git-core/git-remote-https: undefined symbol: curl_global_sslset
+
+Would you like to retry cloning ?
