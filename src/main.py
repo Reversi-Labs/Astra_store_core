@@ -18,4 +18,5 @@ class Core(BD,Installer):
 if __name__=="__main__":
     test = Core()
     #test.print_BD()
+    #test.setup_package()
     test.install_program(test.install["discord"].install)
