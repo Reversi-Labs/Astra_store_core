@@ -20,7 +20,7 @@ import xlrd
 #import xlwt
 import os
 
-class BD_node:
+class BD_install_node:
 
     def __init__(self,install = [],remove = []):
         self.install = install
@@ -42,6 +42,7 @@ class BD:
         print(self.setup)
         print(self.install)
         print(self.error)
+        print(self.update)
 
     def read_BD(self):
 
@@ -66,39 +67,39 @@ class BD:
                 a+=1
             return read
 
-        def unwrap_data(data,error_mode=False):
+        def unwrap_data(data,install_mode=False):
             answer = {}
             for y in range (1,len(data)):
                 if data[y][0]!='': 
                     #print(data[y])
                     name = data[y][0]
                     node = 0
-                    if error_mode: node = [data[y][1]]
-                    else: node = BD_node([data[y][1]],[data[y][2]])
+                    if install_mode: node = BD_install_node([data[y][1]],[data[y][2]])
+                    else: node = [data[y][1]]
                     try:
                         y+=1
                         while data[y][0]=='':
                             #print(" ",data[y]) 
-                            if error_mode:
-                                if data[y][1]!='': node.append(data[y][1])
-                            else:
+                            if install_mode:
                                 if data[y][1]!='': node.install.append(data[y][1])
                                 if data[y][2]!='': node.remove.append(data[y][2])
+                            else:
+                                if data[y][1]!='': node.append(data[y][1])
                             y+=1
                     except IndexError: pass
                     answer[name] = node
             return answer
 
-        def read_list(name_list,error_mode=False):
-            return unwrap_data(read_one_list(name_list),error_mode)
+        def read_list(name_list,install_mode=False):
+            return unwrap_data(read_one_list(name_list),install_mode)
 
         # Open a workbook 
         workbook = xlrd.open_workbook(self.path)
         # read:
         self.setup   = read_list("setup")
-        self.install = read_list("install")
-        self.error   = read_list("error",error_mode=True)
-        self.update  = read_list("update",error_mode=True)
+        self.install = read_list("install",install_mode=True)
+        self.error   = read_list("error")
+        self.update  = read_list("update")
 
 if __name__=="__main__":
 
