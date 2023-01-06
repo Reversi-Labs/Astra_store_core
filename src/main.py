@@ -14,6 +14,7 @@ class Core(BD,Installer):
     def __init__(self):
         self.get_sudo()
         BD.__init__(self)
+        self.download_new_BD()
         self.read_BD()
 
 if __name__=="__main__":

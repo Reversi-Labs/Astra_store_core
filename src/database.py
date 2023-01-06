@@ -12,7 +12,11 @@ Egor Bakay <egor_bakay@inbox.ru>
 january 2023
 
 this code need to these lib:
+windows: 
 pip install xlrd==1.2.0
+linux: 
+sudo python3 -m pip install xlrd==1.2.0
+sudo python3 -m pip install requests
 '''
 
 import xlrd
