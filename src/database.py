@@ -12,13 +12,14 @@ Egor Bakay <egor_bakay@inbox.ru>
 january 2023
 
 this code need to these lib:
-xlrd
-xlwt
+pip install xlrd==1.2.0
 '''
 
 import xlrd
-#import xlwt
 import os
+
+import requests
+from urllib.parse import urlencode
 
 class BD_install_node:
 
@@ -29,14 +30,28 @@ class BD_install_node:
 
 class BD:
 
-    def __init__(self,path=str(os.getcwd())+"/BD.xls"):
+    def __init__(self,path=str(os.getcwd())+"/BD.xlsx"):
         self.path = path
-        #self.data = []
-        #self.database = []
         self.setup = {}
         self.install = {}
         self.error = {}
         self.update = {}
+
+    def download_new_BD(self):
+        try:
+            # https://ru.stackoverflow.com/questions/1088300/как-скачивать-файлы-с-яндекс-диска
+            base_url = 'https://cloud-api.yandex.net/v1/disk/public/resources/download?'
+            public_key = 'https://disk.yandex.ru/i/CZVu4aPXN0dxeg'  # Сюда вписываете вашу ссылку
+            # Получаем загрузочную ссылку
+            final_url = base_url + urlencode(dict(public_key=public_key))
+            response = requests.get(final_url)
+            download_url = response.json()['href']
+            # Загружаем файл и сохраняем его
+            download_response = requests.get(download_url)
+            with open(self.path, 'wb') as f:   # Здесь укажите нужный путь к файлу
+                f.write(download_response.content)
+        except KeyError: print("ERROR: new BD remove from yandex disk")
+        except requests.exceptions.ConnectionError: print("ERROR: no internet for download new BD")
 
     def print_BD(self):
         print(self.setup)
@@ -104,6 +119,7 @@ class BD:
 if __name__=="__main__":
 
     excel = BD()
+    excel.download_new_BD()
     data = excel.read_BD()
     print("=====================")
     excel.print_BD()
