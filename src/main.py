@@ -12,6 +12,7 @@ from installer import Installer
 class Core(BD,Installer):
 
     def __init__(self):
+        self.get_sudo()
         BD.__init__(self)
         self.read_BD()
 
