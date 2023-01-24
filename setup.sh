@@ -12,9 +12,10 @@ echo Install libs - OK
 # unzip Astra_store_core-alpha.zip
 # echo Load project - OK
 
-echo Enjoy work with Astra_store_installer :)
+echo Enjoy work with Astra_store_installer
 
-read -s -n 1
+#echo tap ENTRY
+#read -s -n 1
 # SETTINGS=`stty -g`
 # stty -echo
 # read -n 1
